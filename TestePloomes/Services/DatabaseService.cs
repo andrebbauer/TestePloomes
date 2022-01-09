@@ -20,6 +20,7 @@ namespace TestePloomes.Services
             };
             var client = new SecretClient(new Uri("https://TestePloomes-vault.vault.azure.net/"), new DefaultAzureCredential(), options);
             KeyVaultSecret secret = client.GetSecret("ConnectionString");
+
             return secret.Value;
         }
     }
