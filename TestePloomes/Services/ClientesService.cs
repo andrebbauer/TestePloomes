@@ -9,7 +9,7 @@ namespace TestePloomes.Services
 
         public ClientesService(IClientesDatabaseSettings settings)
         {
-            var client = new MongoClient(settings.ConnectionString);
+            var client = new MongoClient(DatabaseService.getConnectionString());
             var database = client.GetDatabase(settings.DatabaseName);
 
             _clientes = database.GetCollection<Cliente>(settings.ClientesCollectionName);
