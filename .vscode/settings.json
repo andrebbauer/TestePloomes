@@ -1,0 +1,5 @@
+{
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "TestePloomes\\bin\\Release\\net6.0\\publish",
+    "appService.defaultWebAppToDeploy": "/subscriptions/2bacdeda-08cf-4e47-bba6-9bd3c0cfe8ac/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/TestePloomes"
+}
