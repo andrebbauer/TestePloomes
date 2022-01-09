@@ -1,6 +1,9 @@
 using Microsoft.Extensions.Options;
 using TestePloomes.Models;
 using TestePloomes.Services;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+using Azure.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,12 +21,25 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+// secret
+SecretClientOptions options = new SecretClientOptions()
+{
+    Retry =
+        {
+            Delay= TimeSpan.FromSeconds(2),
+            MaxDelay = TimeSpan.FromSeconds(16),
+            MaxRetries = 5,
+            Mode = RetryMode.Exponential
+         }
+};
+var client = new SecretClient(new Uri("https://TestePloomes-vault.vault.azure.net/"), new DefaultAzureCredential(), options);
+KeyVaultSecret secret = client.GetSecret("ConnectionString");
+string secretValue = secret.Value;
+// end secret
+
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
-
-// Enable CORS
-app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseHttpsRedirection();
 
