@@ -6,11 +6,10 @@ namespace TestePloomes.Services
     public class ComunicacaoService
     {
         private readonly IMongoCollection<Comunicacao> _comunicacoes;
-        private string ConnectionString;
 
         public ComunicacaoService(IClientesDatabaseSettings settings)
         {
-            var client = new MongoClient(DatabaseService.getConnectionString());
+            var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
             _comunicacoes = database.GetCollection<Comunicacao>(settings.ComunicacaoCollectionName);

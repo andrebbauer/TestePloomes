@@ -7,18 +7,10 @@ namespace TestePloomes.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; private set; }
+        public string Id { get; set; }
         public string NomeCompleto { get; set; }
         public string Nickname { get; set; }
         public bool Habilitado { get; set; }
         public Contato[] Contatos { get; set; }
-
-        Cliente()
-        {
-            this.Id = "";
-            this.NomeCompleto = "";
-            this.Nickname = "";
-            this.Habilitado = true;
-        }
     }
 }

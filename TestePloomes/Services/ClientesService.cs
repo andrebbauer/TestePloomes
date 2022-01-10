@@ -9,7 +9,7 @@ namespace TestePloomes.Services
 
         public ClientesService(IClientesDatabaseSettings settings)
         {
-            var client = new MongoClient(DatabaseService.getConnectionString());
+            var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
             _clientes = database.GetCollection<Cliente>(settings.ClientesCollectionName);
@@ -25,7 +25,7 @@ namespace TestePloomes.Services
             _clientes.Find(cliente => cliente.Habilitado == false).ToList();
 
         public List<Cliente> GetPorFormaDeContato(string formaDeContato) =>
-            _clientes.Find(cliente => cliente.Habilitado == true && cliente.Contatos.Any(contato => contato.FormaDeContato.Equals(formaDeContato))).ToList();
+            _clientes.Find(cliente => cliente.Habilitado && cliente.Contatos.Any(contato => contato.FormaDeContato.Equals(formaDeContato))).ToList();
 
         public List<Contato> GetContatos(string id) =>
             this.Get(id).Contatos.ToList();
