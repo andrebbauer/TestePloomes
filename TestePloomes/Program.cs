@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 // injecao de dependencia
 builder.Services.Configure<ClientesDatabaseSettings>(builder.Configuration.GetSection(nameof(ClientesDatabaseSettings)));
 builder.Services.AddSingleton<IClientesDatabaseSettings>(sp => sp.GetRequiredService<IOptions<ClientesDatabaseSettings>>().Value);
