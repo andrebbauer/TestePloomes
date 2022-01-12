@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TestePloomes.Models;
 using TestePloomes.Services;
 
@@ -6,6 +7,7 @@ namespace TestePloomes.Controllers
 {
     [Route("api/Clientes")]
     [ApiController]
+    [Authorize]
     public class ClientesController : ControllerBase
     {
         private readonly ClientesService _clientesService;
